@@ -1,0 +1,56 @@
+@import url("https://fonts.googleapis.com/css2?family=Crimson+Pro");
+
+body {
+  margin: 0;
+  /* font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif; */
+    font-family: 'Crimson Pro', serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.custom-button {
+  font-family: 'Crimson Pro', serif;
+  box-sizing: border-box;
+  width: 154px;
+  height: 55px;
+
+  background: #FFFFFF;
+  border: 1px solid #1BF7D3;
+  box-shadow: 4px 4px 4px rgba(27, 247, 211, 0.5);
+}
+
+.custom-nav-button {
+  font-family: 'Crimson Pro', serif;
+  box-sizing: border-box;
+  width: 154px;
+  height: 55px;
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: inset 0px -4px 4px rgba(255, 204, 174, 0.75);
+}
+
+.font{
+  font-family: 'Crimson Pro', serif;
+}
+
+@media screen and (max-width: 768px) {
+
+.hide-on-phone{
+  visibility: hidden;
+}
+
+
+
+}
+
+@media screen and (min-width: 768px) {
+.hide-on-desktop{
+  visibility: hidden;
+}
+}
