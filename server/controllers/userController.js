@@ -8,11 +8,9 @@ module.exports = {
         return (res.json(users))
     },
     //get a single User by their id or username
-    async getSingleUser({ user = null, params }, res) {
-        const foundUser = await User.findOne({
-          $or: [{ _id: user ? user._id : params.id }, { username: params.username }],
-        });
-        return res.json(foundUser);
+    async getSingleUser(req, res) {
+        const foundUser = await User.findOne({_id:req.params.userID})
+        res.json(foundUser);
       },
 
       //create a user (signup)
