@@ -8,11 +8,9 @@ module.exports = {
         return (res.json(users))
     },
     //get a single User by their id or username
-    async getSingleUser({ user = null, params }, res) {
-        const foundUser = await User.findOne({
-          $or: [{ _id: user ? user._id : params.id }, { username: params.username }],
-        });
-        return res.json(foundUser);
+    async getSingleUser(req, res) {
+        const foundUser = await User.findOne({_id:req.params.userID})
+        res.json(foundUser);
       },
 
       //create a user (signup)
@@ -42,6 +40,19 @@ module.exports = {
         }
         const token = signToken(user);
         res.json({ token, user });
+    },
+    async updateOneUser(req,res){
+        User.findOneAndUpdate(
+            {_id:req.params.userID},
+            {$set: req.body},
+            {new:true}
+        )
+        .then((user)=>
+            !user
+            ? res.status(404).json({ message: 'No user with this id!' })
+            : res.json(user)
+        )
+        .catch((err)=>res.status(500).json(err));
     },
 
     //add a group to a user

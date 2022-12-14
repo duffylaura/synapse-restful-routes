@@ -8,7 +8,10 @@ module.exports = {
         const allGroups = await Group.find();
         return res.json(allGroups)
     },
-
+    async singleGroup(req,res){
+        const oneGroup = await Group.findOne({_id:req.params.groupID})
+        res.json(oneGroup);
+    },
     async createGroup({body},res){
         const newGroup = await Group.create(body);
         return res.json(newGroup)
