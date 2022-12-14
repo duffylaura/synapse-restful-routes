@@ -14,17 +14,17 @@ module.exports = {
         return res.json(newGroup)
     },
 
-    async addMemberToGroup({user,body},res){
-        try{ 
-            const groupUpdated = await Group.findByIdAndUpdate(
-            {_id:body.id},
-            {$addToSet:{members:user.id}},
-            {new:true}
-        );
-        return res.json(groupUpdated);
-        }catch(err){
-            console.log(err)
-        } 
+    async addMemberToGroup({params,body},res) {
+        Group.findOneAndUpdate({_id: params.id}, {$addToSet: { members: params.memberID}}, {new: true})
+        .populate({path: 'members', select: ('-__v')})
+        .then(dbGroupData => {
+            if (!dbGroupData) {
+                res.status(404).json({message: 'No Group with this particular ID!'});
+                return;
+            }
+        return (res.json(dbGroupData));
+        })
+        .catch(err => res.json(err));
     },
     //delete group
 
