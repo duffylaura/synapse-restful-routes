@@ -72,10 +72,10 @@ module.exports = {
 
     //deleteGroup from user 
 
-    async removeGroupFromUser({user,params},res){
+    async removeGroupFromUser(req,res){
         const updatedUser = await User.findOneAndUpdate(
-            { _id: user._id },
-            {$pull: {memberships:{groupID:params.groupID}}},
+            { _id: req.params.userId},
+            {$pull: {memberships: req.params.groupID}},
             {new:true}
         );
         return res.json(updatedUser)
