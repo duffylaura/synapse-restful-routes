@@ -24,7 +24,7 @@ const userSchema = new Schema({
         minlength: 8,
     },
     memberships: [{
-        type: Schema.Types.String,
+        type: Schema.Types.ObjectId,
         ref:"Group"
     }]
 });

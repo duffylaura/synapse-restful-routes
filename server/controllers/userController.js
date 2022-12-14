@@ -46,18 +46,17 @@ module.exports = {
 
     //add a group to a user
 
-    async addGroupToUser({user,body},res) {
-        console.log(user) 
-        try {
-            const updatedUser = await User.findOneAndUpdate(
-                {_id:user._id},
-                {$addToSet:{memberships:body}},
-                {new:true}
-            );
-            return res.json(updatedUser);
-        }catch(err){
-            console.log(err)
-        }
+    async addGroupToUser({params,body},res) {
+        User.findOneAndUpdate({_id: params.id}, {$addToSet: { memberships: params.groupID}}, {new: true})
+        .populate({path: 'memberships', select: ('-__v')})
+        .then(dbUsersData => {
+            if (!dbUsersData) {
+                res.status(404).json({message: 'No User with this particular ID!'});
+                return;
+            }
+        return (res.json(dbUsersData));
+        })
+        .catch(err => res.json(err));
     },
 
     //deleteGroup from user 
@@ -77,3 +76,4 @@ module.exports = {
         return res.json("deleted")
     }
 }
+

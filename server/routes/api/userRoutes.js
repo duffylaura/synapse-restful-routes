@@ -15,8 +15,9 @@ const { authMiddleware } = require('../../utils/auth');
 router.route('/signup').post(createUser);
 router.route('/login').post(login);
 router.route('/profile').get(authMiddleware,getSingleUser);
-router.route('/group').put(authMiddleware,addGroupToUser);
+router.route('/:id/membership/:groupID').post(addGroupToUser);
 router.route('/remove/:groupId').delete(removeGroupFromUser).post(deleteUser)
 router.route('/').get(getAllUsers); 
 
 module.exports = router;
+
