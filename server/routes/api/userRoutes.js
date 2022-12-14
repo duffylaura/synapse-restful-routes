@@ -15,6 +15,6 @@ router.route('/signup').post(createUser);
 router.route('/login').post(login);
 router.route('/profile').get(authMiddleware,getSingleUser);
 router.route('/group').put(authMiddleware,addGroupToUser);
-router.route('/profile:groupId').delete(removeGroupFromUser).post(deleteUser)
+router.route('/remove/:groupId').delete(removeGroupFromUser).post(deleteUser)
 
 module.exports = router;
