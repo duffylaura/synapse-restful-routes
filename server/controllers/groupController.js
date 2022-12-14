@@ -34,5 +34,14 @@ module.exports = {
     async deleteGroup(req,res){
         const group = await Group.findOneAndDelete({_id:req.params.groupId})
         return res.json("group deleted")
-    }
+    },
+    async deleteMemberFromGroup (req,res){
+        const updatedGroup = await Group.findOneAndUpdate(
+            { _id: req.params.id},
+            {$pull: {memberships: req.params.memberID}},
+            {new:true}
+        );
+        return res.json(updatedGroup)
+    },
+
 }
