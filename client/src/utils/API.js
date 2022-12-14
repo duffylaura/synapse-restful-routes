@@ -1,16 +1,8 @@
-// route to get logged in user's info (needs the token)
-export const getMe = (token) => {
-    return fetch('/api/users/me', {
-      headers: {
-        'Content-Type': 'application/json',
-        authorization: `Bearer ${token}`,
-      },
-    });
-  };
+  //User-Routes 
 
   //create a User
   export const createUser = (userData) => {
-    return fetch('/api/users', {
+    return fetch('/user/signup', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -19,9 +11,9 @@ export const getMe = (token) => {
     });
   };
   
-  //login a user
+  //login an existing user 
   export const loginUser = (userData) => {
-    return fetch('/api/users/login', {
+    return fetch('/user/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -29,52 +21,75 @@ export const getMe = (token) => {
       body: JSON.stringify(userData),
     });
   };
-  
-  //Update a user
-  export const updateUser = (userData) => {
-    return fetch('/api/users', {
-        method: 'PUT',
-        headres: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(userData),
-    })
-  }; 
 
-  //create a Group 
-          //Make the only thing required for a group the name? 
-          export const createGroup = (groupData) => {
-            return fetch('/api/group', {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-              },
-              body: JSON.stringify(groupData),
-            });
-          };
+// get User by ID
+export const singleUser = (userData) => {
+    return fetch('/user/:userID', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(userData)
+    });
+};
 
-  //join a Group // need both of these put requests happening in same function 
-          // PUT request to update the array of members in a group 
-          export const addToMembers = (userData) => {
-            return fetch('/api/group', {
-              method: 'PUT',
-              headers: {
-                'Content-Type': 'application/json',
-              },
-              body: JSON.stringify(userData),
-            });
-          };
+// Update a User's definition 
+export const updateDefinition = (userData) => {
+  return fetch('/user/:userID', {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(userData),
+  });
+}; 
 
-          //PUT request to update the array of groups in a user's memberships 
-              export const addToMemberships = (groupData) => {
-                  return fetch('/api/group', {
-                  method: 'PUT',
-                  headers: {
-                      'Content-Type': 'application/json',
-                  },
-                  body: JSON.stringify(groupData),
-                  });
-              };
+// Update a User's membership array (adds a group)
+export const addMembership = (userData) => {
+  return fetch ('/user/:id/membership/:groupID', {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(userData),
+  });
+};
+
+// GROUP ROUTES
+
+// Get a group by ID 
+export const singleGroup = (groupData) => {
+  return fetch ('/group/:groupID', {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(groupData),
+  });
+};
+
+//Create a new group 
+export const createGroup = (groupData) => {
+  return fetch ('/group/createGroup', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(groupData),
+  });
+};
+
+// Update membership arrray (add user to group)
+export const addMembers = (groupData) => {
+  return fetch ('/:id/member/:memberID', {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(groupData),
+  })
+}
+
 
 //  // Use this example for job board query API  (from HW21)
 //   // make a search to google books api
