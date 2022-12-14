@@ -1,4 +1,4 @@
-const {User,Group}= require('../models');
+const {User}= require('../models');
 const { signToken } = require('../utils/auth');
 
 module.exports = {
@@ -7,7 +7,7 @@ module.exports = {
         const foundUser = await User.findOne({
           $or: [{ _id: user ? user._id : params.id }, { username: params.username }],
         });
-        res.json(foundUser);
+        return res.json(foundUser);
       },
 
       //create a user (signup)
@@ -19,7 +19,7 @@ module.exports = {
         return res.status(400).json({ message: 'Something is wrong!' });
         }
         const token = signToken(user);
-        res.json({ token, user });
+         res.json({ token, user });
     },
     
     // login a user with either a username an dpassword 
@@ -45,7 +45,7 @@ module.exports = {
         console.log(user) 
         try {
             const updatedUser = await User.findOneAndUpdate(
-                {_id:user._id}
+                {_id:user._id},
                 {$addToSet:{memberships:body}},
                 {new:true}
             );
