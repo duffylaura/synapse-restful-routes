@@ -5,8 +5,8 @@ module.exports = {
     //get all groups
 
     async getAllGroups(req,res){
-        const allGropus = await Group.find();
-        return 
+        const allGroups = await Group.find();
+        return res.json(allGroups)
     },
 
     async createGroup({body},res){

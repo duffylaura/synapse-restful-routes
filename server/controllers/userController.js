@@ -2,6 +2,11 @@ const {User}= require('../models');
 const { signToken } = require('../utils/auth');
 
 module.exports = {
+    //get all users 
+    async getAllUsers(req, res) {
+        const users = await User.find(); 
+        return (res.json(users))
+    },
     //get a single User by their id or username
     async getSingleUser({ user = null, params }, res) {
         const foundUser = await User.findOne({
