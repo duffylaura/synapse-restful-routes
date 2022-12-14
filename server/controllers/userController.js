@@ -41,6 +41,19 @@ module.exports = {
         const token = signToken(user);
         res.json({ token, user });
     },
+    async updateOneUser(req,res){
+        User.findOneAndUpdate(
+            {_id:req.params.userID},
+            {$set: req.body},
+            {new:true}
+        )
+        .then((user)=>
+            !user
+            ? res.status(404).json({ message: 'No user with this id!' })
+            : res.json(user)
+        )
+        .catch((err)=>res.status(500).json(err));
+    },
 
     //add a group to a user
 
