@@ -1,46 +1,11 @@
-import React, { useState } from 'react';
-import { useMutation } from '@apollo/client';
-import { ADD_USER } from '../utils/mutations';
-import AuthService from '../utils/auth';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../assets/logo-grey-banner.png';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../index.css';
+import SignupForm from '../components/SignupForm/index';
 
 function Signup() {
-  const [formState, setFormState] = useState({
-    username: '',
-    email: '',
-    password: '',
-  });
-  const [addUser, { error, data }] = useMutation(ADD_USER);
-  const [errorMessage] = useState('');
-  const handleInputChange = (e) => {
-    // Getting the value and name of the input which triggered the change
-    const {name, value} = e.target;
-    setFormState({
-      ...formState,
-      [name]: value,
-    });
-  };
-  const handleFormSubmit = async (e) => {
-    // Preventing the default behavior of the form submit (which is to refresh the page)
-    e.preventDefault();
-    try {
-      const { data } = await addUser({
-        variables: { ...formState },
-      });
-      AuthService.login(data.addUser.token);
-      //set form stat back to nothing
-      setFormState ({
-        username: '',
-        email: '',
-        password: '',
-      });
-    } catch (e) {
-      console.error(e);
-    }
-  };
   return (
     <div className="container">
       <div className="font">
@@ -62,33 +27,8 @@ function Signup() {
                   <Link to="/">back to the homepage.</Link>
                 </p>
               ) : (
-                <form className="form">
-                  <div className="col text-center"><h2> Sign Up</h2></div><br></br>
-                  <div className="col text-center">
-                    <label>Username:
-                      <input value={formState.username} name="username"
-                        onChange={handleInputChange} type="text"
-                        placeholder="Create your username." />
-                    </label>
-                  </div><br></br>
-                  <div className="col text-center">
-                    <label>Email:
-                      <input value={formState.email} name="email"
-                        onChange={handleInputChange} type="email"
-                        placeholder="Enter email." />
-                    </label>
-                  </div><br></br>
-                  <div className="col text-center">
-                    <label>Password:
-                      <input value={formState.password} name="password"
-                        onChange={handleInputChange} type="password"
-                        placeholder="Enter a password." />
-                    </label>
-                  </div><br></br>
-                  <div className="col text-center">
-                    <button className="custom-button" type="button" onClick={handleFormSubmit}>Join the Community!</button>
-                  </div>
-                </form>
+
+                  <SignupForm />
               )}
               {errorMessage && (<div> <p className="error-text">{errorMessage}</p> </div>)}
             </div>
