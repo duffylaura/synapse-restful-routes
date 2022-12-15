@@ -2,7 +2,9 @@ import React, {useState} from 'react';
 import NavBar from '../components/NavBar'; 
 import Auth from '../utils/auth';
 import {createGroup} from '../utils/API'; 
-import { Form } from 'react-bootstrap/lib/Navbar';
+import { Form, Button} from 'react-bootstrap';
+import logo from '../assets/logo-grey-banner.png';
+import profilePlaceholder from '../assets/profile-placeholder.png';
 
 
 const Group = () => {

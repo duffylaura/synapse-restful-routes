@@ -9,7 +9,7 @@ const {
     deleteMemberFromGroup
 } = require('../../controllers/groupController');
 
-const { authMiddleware } = require('../../utils/auth');
+// const { authMiddleware } = require('../../utils/auth');
 
 
 router.route('/').get(getAllGroups);

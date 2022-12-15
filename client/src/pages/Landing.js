@@ -1,12 +1,11 @@
 import React from "react";
 import logo from '../assets/logo-grey-banner.png';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import '../index.css';
 import { Link } from 'react-router-dom';
 
 function Landing() {
     return (
-        <div clasName="container">
+        <div className="container">
             <div className="row"> <br></br> <br></br></div>
             <div className="row align-items-center">
                 <div className="col-sm"> </div>
