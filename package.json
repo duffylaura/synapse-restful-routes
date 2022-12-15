@@ -2,7 +2,7 @@
   "name": "synapse",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "start": "node server/server.js --ignore client",
     "develop": "concurrently \"cd server && npm run watch\" \"cd client && npm start\"",
@@ -16,9 +16,13 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/duffylaura/synapse/issues"
   },
-  "homepage": "https://github.com/duffylaura/synapse#readme"
+  "homepage": "https://github.com/duffylaura/synapse#readme",
+  "dependencies": {
+    "concurrently": "^7.6.0",
+    "react-router-dom": "^6.4.5"
+  }
 }

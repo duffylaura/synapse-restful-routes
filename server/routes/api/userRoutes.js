@@ -11,7 +11,7 @@ const {
     deleteUser
 } = require('../../controllers/userController')
 
-const { authMiddleware } = require('../../utils/auth');
+// const { authMiddleware } = require('../../utils/auth');
 
 router.route('/signup').post(createUser);
 router.route('/login').post(login);

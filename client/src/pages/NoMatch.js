@@ -1,5 +1,5 @@
 import React from "react";
-import logo from '../assets/logo-grey-banner';
+import logo from '../assets/logo-grey-banner.png';
 
 
 const NoMatch = () => {

@@ -1,8 +1,10 @@
 import React, {useState} from 'react'; 
 import NavBar from '../components/NavBar'; 
-import Auth from '../utils/auth';
-import {updateUser} from '../utils/API'; 
-import { Form } from 'react-bootstrap/lib/Navbar';
+import {updateDefinition} from '../utils/API'; 
+import { Form, Button } from 'react-bootstrap';
+import logo from '../assets/logo-grey-banner.png';
+import profilePlaceholder from '../assets/profile-placeholder.png';
+
 
 //The only input on the profile (right now) is a user defining themselves
 const Profile = () => {
@@ -28,12 +30,9 @@ const Profile = () => {
 
     //create a method to handle saving a definition to our database
     const handleSaveDefinition = async (userData) => {
-        const token = Auth.loggedIn() ? Auth.getToken() : null; 
-
-        if (!token) {return false;}
 
         try {
-            const response = await updateUser(userData, token); 
+            const response = await updateDefinition(userData); 
             if (!response.ok) {throw new Error ('Cannot update user')}
 
             //if user is successfully updated, save input to state
